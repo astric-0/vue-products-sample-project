@@ -1,7 +1,10 @@
 <script setup>
+import store from '../store'
+
 const props = defineProps({
-    product: String
+    product: Object
 });
+
 </script>
 
 <template>
@@ -9,8 +12,11 @@ const props = defineProps({
         <div class="row">
             <h4 class="col-8 p-2 shadow m-0 border rounded">{{ product.title }}</h4>
             <div class="col btn-group">
-                <button class="btn btn-outline-danger">
-                    <font-awesome-icon icon="fa-solid fa-trash" />
+                <button 
+                    class="btn btn-outline-danger" 
+                    @click="store.actions.removeProduct(product.id)"
+                >
+                    <font-awesome-icon icon="fa-solid fa-trash"/>
                 </button>
                 <button class="btn btn-primary">
                     <font-awesome-icon icon="fa-solid fa-check" />

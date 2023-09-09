@@ -38,3 +38,63 @@ export const errorAlert = (title = 'Error', text = '') => {
         text
     });
 }
+
+export const productInfoAlert = product => {
+
+    const { title, id, brand, category, color, size, description } = product;
+
+    const html = `
+        <div class='card'>
+            <div class='card-body'>                
+                <div class='card-text'>
+                    ${ description }
+                </div>
+            </div>
+            <ul class='list-group list-group-flush'>
+                <li class='list-group-item d-flex justify-content-center align-items-start'>
+                    <div class='ms-2 me-auto'>
+                        <div class='fw-bold'>Product Number</div>
+                        ${ id }                        
+                    </div>
+                </li>
+
+                <li class='list-group-item d-flex justify-content-center align-items-start'>
+                    <div class='ms-2 me-auto'>
+                        <div class='fw-bold'>Brand</div>
+                        ${ brand }                        
+                    </div>
+                </li>
+
+                <li class='list-group-item d-flex justify-content-center align-items-start'>
+                    <div class='ms-2 me-auto'>
+                        <div class='fw-bold'>Category</div>
+                        ${ category }                        
+                    </div>
+                </li>
+
+                <li class='list-group-item d-flex justify-content-center align-items-start'>
+                    <div class='ms-2 me-auto'>
+                        <div class='fw-bold'>Color</div>
+                        ${ color }                        
+                    </div>
+                </li>
+
+                <li class='list-group-item d-flex justify-content-center align-items-start'>
+                    <div class='ms-2 me-auto'>
+                        <div class='fw-bold'>Size</div>
+                        ${ size }                        
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    `
+
+    Swal.fire({
+        title,
+        html,
+        customClass: {
+            content: 'text-start'
+        }
+    })
+}

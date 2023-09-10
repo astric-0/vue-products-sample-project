@@ -2,6 +2,9 @@
 import store from '../store';
 import ProductListItem from './ProductListItem.vue';
 // const products = store.getters.getProducts();
+defineProps({
+    setUpdate: Function
+})
 </script>
 
 <template>
@@ -11,7 +14,7 @@ import ProductListItem from './ProductListItem.vue';
     <div v-else class="container">
         <h1 class="text-primary text-center">Products</h1>
         <ul class="list-group">
-            <ProductListItem v-for="product in store.getters.getProducts()" :product="product" />
+            <ProductListItem :setUpdate="setUpdate" v-for="product in store.getters.getProducts()" :product="product" />
         </ul>
     </div>
 </template>

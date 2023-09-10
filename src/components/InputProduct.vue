@@ -9,17 +9,27 @@ import NumberInput from './NumberInput.vue';
 import CheckBoxInput from './CheckBoxInput.vue';
 import TextAreaInput from './TextAreaInput.vue';
 
-const init = {
-    id: '',
-    title: '',
-    description: '',
-    brand: '',
-    category: '',
-    color: 'Blue',
-    size: []
-}
+const props = defineProps({
+    init: {
+        type: Object,
+        default: {
+            id: '',
+            title: '',
+            description: '',
+            brand: '',
+            category: '',
+            color: 'Blue',
+            size: []
+        }
+    },
+    
+    update: {
+        type: Boolean,
+        default: false
+    }
+})
 
-const product = ref({ ...init })
+const product = ref({ ...props.init })
 
 const errorList = ref([]);
 
@@ -74,11 +84,11 @@ const handleSubmit = _ => {
         return errorListAlert(undefined, errorList.value);
 
     if (store.getters.getProducts().find(item => item.id == product.value.id))
-        return errorAlert('Product ID already exists', );
+        return errorAlert('Product ID already exists',);
 
     store.mutations.addProduct(product.value);
     successAlert('Product Saved');
-    product.value = { ...init };
+    product.value = { ...props.init };
 }
 
 </script>

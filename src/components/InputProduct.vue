@@ -18,13 +18,17 @@ const init = {
     color: 'Blue',
     size: []
 }
+
 const product = ref({ ...init })
 
 const errorList = ref([]);
 
 const pushErrorList = error => !errorList.value.includes(error) && errorList.value.push(error);
+
 const removeError = error => {
-    errorList.value = errorList.value.includes(error) ? errorList.value.filter(item => item !== error) : errorList.value;
+    errorList.value = errorList.value.includes(error)
+        ? errorList.value.filter(item => item !== error)
+        : errorList.value;
 }
 
 const colors = [

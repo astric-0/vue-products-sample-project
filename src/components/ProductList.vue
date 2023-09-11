@@ -14,7 +14,13 @@ defineProps({
     <div v-else class="container">
         <h1 class="text-primary text-center">Products</h1>
         <ul class="list-group">
-            <ProductListItem :setUpdate="setUpdate" v-for="product in store.getters.getProducts()" :key="product.id" :product="product" />
+            <ProductListItem 
+                v-for="(product, index) in store.getters.getProducts()" 
+                :setUpdate="setUpdate" 
+                :index="index" 
+                :key="product.id" 
+                :product="product" 
+            />
         </ul>
     </div>
 </template>

@@ -4,7 +4,8 @@ import { productInfoAlert } from '../assets/alerts';
 
 const props = defineProps({
     product: Object,
-    setUpdate: Function
+    setUpdate: Function,
+    index: Number
 });
 
 </script>
@@ -20,7 +21,7 @@ const props = defineProps({
                 <button class="btn btn-outline-info" @click="productInfoAlert(product)">
                     <font-awesome-icon icon="fa-solid fa-info" />
                 </button>
-                <button class="btn btn-primary" @click="setUpdate(true, product)">
+                <button class="btn btn-primary" @click="setUpdate(true, index, product)">
                     <font-awesome-icon icon="fa-solid fa-check" />
                 </button>
             </div>

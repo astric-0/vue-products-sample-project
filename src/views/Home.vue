@@ -16,21 +16,21 @@ const init = {
 
 const initProduct = ref({ ...init });
 
-const update = ref(false);
+const update = ref({
+    check: false,
+    index: -1
+});
 
-const componentKey = ref(1);
-
-function setUpdate (value = false, product = { ...init }) { 
-    update.value = value;
-    initProduct.value = value ? { ...product } : { ...init }; 
-    componentKey.value += 1;   
+function setUpdate (check = false, index, product = { ...init }) { 
+    update.value = { check, index: (check ? index : -1) };
+    initProduct.value = check ? { ...product } : { ...init }; 
 }
 </script>
 
 <template>
     <div class="row justify-content-center">
         <div class="col-12 col-md-6">
-            <InputProduct :init="initProduct" :update="update" :setUpdate="setUpdate" :key="componentKey" />
+            <InputProduct :init="initProduct" :update="update" :setUpdate="setUpdate" :key="update" />
         </div>
 
         <div class="col-12 col-md-5">

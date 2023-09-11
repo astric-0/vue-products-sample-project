@@ -1,3 +1,15 @@
+<script>
+const initReset = {
+    id: '',
+    title: '',
+    description: '',
+    brand: '',
+    category: '',
+    color: 'Blue',
+    size: []
+}
+</script>
+
 <script setup>
 import { ref } from 'vue';
 
@@ -12,21 +24,15 @@ import TextAreaInput from './TextAreaInput.vue';
 const props = defineProps({
     init: {
         type: Object,
-        default: {
-            id: '',
-            title: '',
-            description: '',
-            brand: '',
-            category: '',
-            color: 'Blue',
-            size: []
-        }
+        default: { ...initReset }
     },
-    
+
     update: {
-        type: Boolean,
-        default: false
-    }
+        type: Object,
+        default: {}
+    },
+
+    setUpdate: Function
 })
 
 const product = ref({ ...props.init })
@@ -83,12 +89,25 @@ const handleSubmit = _ => {
     if (errorList.value.length > 0)
         return errorListAlert(undefined, errorList.value);
 
-    if (store.getters.getProducts().find(item => item.id == product.value.id))
+    if (!props.update.check && store.getters.getProducts().find(item => item.id == product.value.id))
         return errorAlert('Product ID already exists',);
 
-    store.mutations.addProduct(product.value);
-    successAlert('Product Saved');
-    product.value = { ...props.init };
+    if (props.update.check === true) {
+        store.mutations.updateProduct(product, props.update.index);
+        successAlert('Product Updated');
+        props.setUpdate();
+    }
+    else {
+        store.mutations.addProduct(product.value);
+        successAlert('Product Saved');
+    }
+
+    product.value = { ...initReset };
+}
+
+const handleReset = _ => {
+    product.value = { ...initReset };
+    props.update.check && setUpdate();
 }
 
 </script>
@@ -124,6 +143,11 @@ const handleSubmit = _ => {
         <TextAreaInput label="Product Description" :model="product" field="description" :addErrorCB="pushErrorList"
             :removeErrorCB="removeError" required />
 
-        <button class="mt-3 w-100 btn btn-outline-primary" @click="handleSubmit()">Add Product</button>
+        <button class="mt-3 w-100 btn btn-outline-primary" @click="handleSubmit()">
+            {{ update.check ? 'Update Product' : 'Add Product' }}
+        </button>
+        <button class="mt-2 w-100 btn btn-outline-danger" @click="handleReset()">
+            Reset
+        </button>
     </div>
 </template>

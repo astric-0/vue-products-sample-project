@@ -17,7 +17,11 @@ const store = ({
                 setProducts(store.state.products)
             }
         },
-
+        updateProduct(value, index) {
+            store.state.products[index] = value;           
+            store.state.products = { ...store.state.products };
+            setProducts(store.state.products);
+        }
     },
 
     actions: {

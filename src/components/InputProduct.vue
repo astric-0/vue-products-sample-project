@@ -93,7 +93,7 @@ const handleSubmit = _ => {
         return errorAlert('Product ID already exists',);
 
     if (props.update.check === true) {
-        store.mutations.updateProduct(product, props.update.index);
+        store.mutations.updateProduct(product.value, props.update.index);
         successAlert('Product Updated');
         props.setUpdate();
     }
@@ -107,7 +107,7 @@ const handleSubmit = _ => {
 
 const handleReset = _ => {
     product.value = { ...initReset };
-    props.update.check && setUpdate();
+    props.update.check === true && props.setUpdate();
 }
 
 </script>

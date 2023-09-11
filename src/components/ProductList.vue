@@ -17,7 +17,7 @@ defineProps({
             <ProductListItem 
                 v-for="(product, index) in store.getters.getProducts()" 
                 :setUpdate="setUpdate" 
-                :index="index" 
+                :index="Number(index)" 
                 :key="product.id" 
                 :product="product" 
             />

@@ -21,7 +21,7 @@ const update = ref({
     index: -1
 });
 
-function setUpdate (check = false, index, product = { ...init }) { 
+function setUpdate (check = false, index, product = {}) { 
     update.value = { check, index: (check ? index : -1) };
     initProduct.value = check ? { ...product } : { ...init }; 
 }

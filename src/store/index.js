@@ -6,7 +6,7 @@ const store = ({
 
     getters: {
         getProducts() {
-            return store.state.products;
+            return store.state.products ?? [];
         }
     },
 
@@ -18,8 +18,8 @@ const store = ({
             }
         },
         updateProduct(value, index) {
-            store.state.products[index] = value;           
-            store.state.products = { ...store.state.products };
+            store.state.products[index] = value;
+            store.state.products = [ ...store.state.products ];
             setProducts(store.state.products);
         }
     },
@@ -30,13 +30,13 @@ const store = ({
         },
 
         removeProduct(id) {
-            store.state.products = store.state.products.filter(item => item.id != id)
-            setProducts(store.state.products)
+            store.state.products = store.state.products.filter(item => item.id != id);
+            setProducts(store.state.products);
         },
 
         resetProducts() {
             store.state.products = {};
-            setProducts(store.state.products)
+            setProducts(store.state.products);
         }
     }
 })
